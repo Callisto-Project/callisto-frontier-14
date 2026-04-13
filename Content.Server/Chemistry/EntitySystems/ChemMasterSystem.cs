@@ -59,6 +59,7 @@ namespace Content.Server.Chemistry.EntitySystems
             SubscribeLocalEvent<ChemMasterComponent, ChemMasterReagentAmountButtonMessage>(OnReagentButtonMessage);
             SubscribeLocalEvent<ChemMasterComponent, ChemMasterCreatePillsMessage>(OnCreatePillsMessage);
             SubscribeLocalEvent<ChemMasterComponent, ChemMasterOutputToBottleMessage>(OnOutputToBottleMessage);
+            SubscribeLocalEvent<ChemMasterComponent, ChemMasterFillMedipenMessage>(OnFillMedipenMessage); // CS-Tweak
         }
 
         private void SubscribeUpdateUiState<T>(Entity<ChemMasterComponent> ent, ref T ev)
@@ -124,10 +125,16 @@ namespace Content.Server.Chemistry.EntitySystems
             switch (chemMaster.Comp.Mode)
             {
                 case ChemMasterMode.Transfer:
-                    TransferReagents(chemMaster, message.ReagentId, message.Amount.GetFixedPoint(), message.FromBuffer);
+                    TransferReagents(chemMaster, message.ReagentId, message.Amount.GetFixedPoint(), false, message.Actor); // Callisto-Tweak: message.FromBuffer -> false
                     break;
                 case ChemMasterMode.Discard:
-                    DiscardReagents(chemMaster, message.ReagentId, message.Amount.GetFixedPoint(), message.FromBuffer);
+                    DiscardReagents(chemMaster, message.ReagentId, message.Amount.GetFixedPoint(), false); // CS-Tweak: message.FromBuffer -> false
+                    break;
+                // CS-Tweak start
+                case ChemMasterMode.Fill:
+                    if (message.Target == ChemMasterTarget.Medipen)
+                        TransferToMedipen(chemMaster, message.ReagentId, message.Amount.GetFixedPoint(), message.Actor);
+                // CS-Tweak end
                     break;
                 default:
                     // Invalid mode.
@@ -142,7 +149,7 @@ namespace Content.Server.Chemistry.EntitySystems
             var container = _itemSlotsSystem.GetItemOrNull(chemMaster, SharedChemMaster.InputSlotName);
             if (container is null ||
                 !_solutionContainerSystem.TryGetFitsInDispenser(container.Value, out var containerSoln, out var containerSolution) ||
-                !_solutionContainerSystem.TryGetSolution(chemMaster.Owner, SharedChemMaster.BufferSolutionName, out _, out var bufferSolution))
+                !_solutionContainerSystem.TryGetSolution(chemMaster.Owner, SharedChemMaster.BufferSolutionName, out var bufferSoln, out var bufferSolution)) // CS-Tweak
             {
                 return;
             }
@@ -157,7 +164,7 @@ namespace Content.Server.Chemistry.EntitySystems
             {
                 amount = FixedPoint2.Min(amount, containerSolution.GetReagentQuantity(id));
                 _solutionContainerSystem.RemoveReagent(containerSoln.Value, id, amount);
-                bufferSolution.AddReagent(id, amount);
+                _solutionContainerSystem.TryAddReagent(bufferSoln.Value, id, amount, out var _); // Callisto-Tweak
             }
 
             UpdateUiState(chemMaster, updateLabel: true);
@@ -186,6 +193,33 @@ namespace Content.Server.Chemistry.EntitySystems
 
             UpdateUiState(chemMaster, updateLabel: fromBuffer);
         }
+
+        // CS-Tweak start
+        private void TransferToMedipen(Entity<ChemMasterComponent> chemMaster, ReagentId id, FixedPoint2 amount, EntityUid? actor = null)
+        {
+            var medipen = _itemSlotsSystem.GetItemOrNull(chemMaster, SharedChemMaster.OutputSlotName);
+            if (medipen is null ||
+                !_solutionContainerSystem.TryGetSolution(medipen.Value, "pen", out var medipenSoln, out var medipenSolution) ||
+                !_solutionContainerSystem.TryGetSolution(chemMaster.Owner, SharedChemMaster.BufferSolutionName, out _, out var bufferSolution))
+            {
+                return;
+            }
+
+            var removedAmount = bufferSolution.RemoveReagent(id, amount, preserveOrder: true);
+            if (removedAmount > 0)
+            {
+                _solutionContainerSystem.TryAddReagent(medipenSoln.Value, id, removedAmount, out var acceptedAmount);
+                removedAmount = acceptedAmount;
+            }
+
+            if (actor.HasValue)
+                _adminLogger.Add(LogType.Storage,
+                                 LogImpact.Low,
+                                 $"{ToPrettyString(actor)} transferred {removedAmount}u of {id} to {ToPrettyString(medipen.Value)} from {ToPrettyString(chemMaster)}");
+
+            UpdateUiState(chemMaster);
+        }
+        // CS-Tweak end
 
         private void OnCreatePillsMessage(Entity<ChemMasterComponent> chemMaster, ref ChemMasterCreatePillsMessage message)
         {
@@ -279,6 +313,43 @@ namespace Content.Server.Chemistry.EntitySystems
             UpdateUiState(chemMaster);
             ClickSound(chemMaster);
         }
+
+        // CS-Tweak start
+        private void OnFillMedipenMessage(Entity<ChemMasterComponent> chemMaster, ref ChemMasterFillMedipenMessage message)
+        {
+            var user = message.Actor;
+            var maybeContainer = _itemSlotsSystem.GetItemOrNull(chemMaster, SharedChemMaster.OutputSlotName);
+            if (maybeContainer is not { Valid: true } container
+                || !_solutionContainerSystem.TryGetSolution(container, "pen", out var soln, out var solution))
+            {
+                return; // not a medipen or no pen solution
+            }
+
+            // Ensure label length is within the character limit.
+            if (message.Label.Length > SharedChemMaster.LabelMaxLength)
+                return;
+
+            var availableVolume = solution.AvailableVolume;
+            if (availableVolume == 0)
+            {
+                _popupSystem.PopupCursor(Loc.GetString("chem-master-window-container-full-text"), user);
+                return;
+            }
+
+            if (!WithdrawFromBuffer(chemMaster, availableVolume, user, out var withdrawal))
+                return;
+
+            _labelSystem.Label(container, message.Label);
+            _solutionContainerSystem.TryAddSolution(soln.Value, withdrawal);
+
+            // Log medipen filling by a user
+            _adminLogger.Add(LogType.Action, LogImpact.Low,
+                $"{ToPrettyString(user):user} filled {ToPrettyString(container):medipen} {SharedSolutionContainerSystem.ToPrettyString(solution)}");
+
+            UpdateUiState(chemMaster);
+            ClickSound(chemMaster);
+        }
+        // CS-Tweak end
 
         private bool WithdrawFromBuffer(
             Entity<ChemMasterComponent> chemMaster,

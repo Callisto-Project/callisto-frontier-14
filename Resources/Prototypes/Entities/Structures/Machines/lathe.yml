@@ -571,6 +571,8 @@
     idleState: icon
     runningState: icon
     staticPacks:
+    - CSEmptyMedipenStatic # Callisto-Tweak
+    dynamicPacks: # Orion-Edit: Static > Dynamic
     - TopicalsStatic
     - ChemistryStatic
     - MedicalStatic

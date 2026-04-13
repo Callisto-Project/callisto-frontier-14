@@ -93,6 +93,8 @@
           tags:
           - Bottle
           - PillCanister
+          - MedicalPatch # Goobstation
+          - CSMedipen # Callisto-Tweak
   - type: SolutionContainerManager
     solutions:
       buffer: {}

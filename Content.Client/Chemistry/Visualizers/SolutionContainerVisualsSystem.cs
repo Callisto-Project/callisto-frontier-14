@@ -7,6 +7,7 @@ using Content.Shared.Clothing.Components;
 using Content.Shared.Hands;
 using Content.Shared.Item;
 using Content.Shared.Rounding;
+using Content.Shared._Chaos.Chemistry.Components;
 using Robust.Client.GameObjects;
 using Robust.Shared.Prototypes;
 
@@ -48,6 +49,13 @@ public sealed class SolutionContainerVisualsSystem : VisualizerSystem<SolutionCo
 
         if (!AppearanceSystem.TryGetData<float>(uid, SolutionContainerVisuals.FillFraction, out var fraction, args.Component))
             return;
+
+        // Callisto-Tweak start
+        if (TryComp<SingleUseHyposprayComponent>(uid, out var singleUseComp))
+        {
+            fraction = singleUseComp.IsUsed ? 0f : 1f;
+        }
+        // Callisto-Tweak end
 
         if (args.Sprite == null)
             return;
