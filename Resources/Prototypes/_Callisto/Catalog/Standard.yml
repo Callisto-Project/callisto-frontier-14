@@ -1,0 +1,97 @@
+# Callisto-start
+- type: jukebox
+  id: addicted
+  name: (Callisto) addicted - чего хотел добиться ты
+  path:
+    path: /Audio/_Callisto/Jukebox/addicted-chego-khotel-dobitsya-ty.ogg
+
+- type: jukebox
+  id: angerfist
+  name: (Callisto) Angerfist - Lncoming
+  path:
+    path: /Audio/_Callisto/Jukebox/angerfist-lncoming.ogg
+
+- type: jukebox
+  id: arktida_imperiya
+  name: (Callisto) Арктида - Моя империя
+  path:
+    path: /Audio/_Callisto/Jukebox/arktida-moya-imperiya.ogg
+
+- type: jukebox
+  id: arktida_valashskijj
+  name: (Callisto) Арктида - Валашский князь
+  path:
+    path: /Audio/_Callisto/Jukebox/arktida-valashskijj-knyaz.ogg
+
+- type: jukebox
+  id: beregovoe_bratstvo
+  name: (Callisto) Береговое братство - Охота
+  path:
+    path: /Audio/_Callisto/Jukebox/beregovoe-bratstvo-okhota.ogg
+
+- type: jukebox
+  id: fun_mode
+  name: (Callisto) Fun Mode - Jrkho Войны
+  path:
+    path: /Audio/_Callisto/Jukebox/fun-mode-jrkho-vojjny.ogg
+
+- type: jukebox
+  id: veter
+  name: (Callisto) Группа Ветер - Не делай людям добра
+  path:
+    path: /Audio/_Callisto/Jukebox/gruppa-veter-ne-delajj-lyudyam-dobra.ogg
+
+- type: jukebox
+  id: heavy_raid
+  name: (Callisto) Heavy Raid - Чернокнижник
+  path:
+    path: /Audio/_Callisto/Jukebox/heavy-raid-chernoknizhnik.ogg
+
+- type: jukebox
+  id: inkvisitor
+  name: (Callisto) Инквизитор - Ловчие душ
+  path:
+    path: /Audio/_Callisto/Jukebox/inkvisitor-lovchie-dush.ogg
+
+- type: jukebox
+  id: jepidemiya
+  name: (Callisto) Эпидемия - Когда уснут драконы
+  path:
+    path: /Audio/_Callisto/Jukebox/jepidemiya-kogda-usnut-drakony.ogg
+
+- type: jukebox
+  id: maretu
+  name: (Callisto) Maretu - I'm High
+  path:
+    path: /Audio/_Callisto/Jukebox/maretu-im-high.ogg
+
+- type: jukebox
+  id: molitva
+  name: (Callisto) Молитва
+  path:
+    path: /Audio/_Callisto/Jukebox/molitva.ogg
+
+- type: jukebox
+  id: neizvestnyjj
+  name: (Callisto) Неизвестный - Тот у кого глаза велики
+  path:
+    path: /Audio/_Callisto/Jukebox/neizvestnyjj-tot-u-kogo-glaza-veliki.ogg
+
+- type: jukebox
+  id: norma_tale
+  name: (Callisto) Norma Tale - Кисточка
+  path:
+    path: /Audio/_Callisto/Jukebox/norma-tale-kistochka.ogg
+
+- type: jukebox
+  id: satisfakciya
+  name: (Callisto) Сатисфакция - Нечего терять
+  path:
+    path: /Audio/_Callisto/Jukebox/satisfakciya-nechego-teryat.ogg
+
+- type: jukebox
+  id: modus_operandi
+  name: (Callisto) The DJ Producer - Modus Operandi
+  path:
+    path: /Audio/_Callisto/Jukebox/the-dj-producer-modus-operandi.ogg
+# Callisto-end
