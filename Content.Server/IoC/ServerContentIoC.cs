@@ -9,7 +9,7 @@ using Content.Server.Administration.Notes;
 using Content.Server.Afk;
 using Content.Server.Chat.Managers;
 using Content.Server.Connection;
-// using Content.Server.Corvax.DiscordAuth;
+using Content.Server.Corvax.DiscordAuth;
 using Content.Server.Corvax.JoinQueue;
 using Content.Server.Corvax.TTS;
 using Content.Server.Database;
@@ -77,7 +77,7 @@ internal static class ServerContentIoC
         deps.Register<JoinQueueManager>(); // Corvax-Queue
         deps.Register<TTSManager>(); // Corvax-TTS
         deps.Register<SponsorMusicManager>(); // Lua SponsorPlayer
-        // deps.Register<DiscordAuthManager>(); // Corvax-DiscordAuth
+        deps.Register<DiscordAuthManager>(); // Corvax-DiscordAuth
         deps.Register<ServerInfoManager>();
         deps.Register<PoissonDiskSampler>();
         deps.Register<DiscordWebhook>();
@@ -97,6 +97,6 @@ internal static class ServerContentIoC
         deps.Register<MiniAuthManager>(); //Frontier
         deps.Register<DiscordLink>();
         deps.Register<DiscordChatLink>();
-        deps.Register<DiscordAuthManager>(); // Callisto
+        deps.Register<CallistoDiscordAuthManager>(); // Callisto
     }
 }

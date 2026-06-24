@@ -70,7 +70,7 @@ namespace Content.Server.Connection
         [Dependency] private readonly IAdminManager _adminManager = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
         [Dependency] private readonly MiniAuthManager _authManager = default!; //Frontier
-        [Dependency] private readonly DiscordAuthManager _discordAuthManager = default!; // Callisto
+        [Dependency] private readonly CallistoDiscordAuthManager _callistoDiscordAuthManager = default!; // Callisto
 
         private GameTicker? _ticker;
 
@@ -257,7 +257,7 @@ namespace Content.Server.Connection
             // Callisto-Start: Check Auth for Discord ID + красивое окно с кодом
             if (_cfg.GetCVar(CCVars.DiscordAuthEnable))
             {
-                var discordId = await _discordAuthManager.GetDiscordId(userId);
+                var discordId = await _callistoDiscordAuthManager.GetDiscordId(userId);
 
                 if (discordId != null)
                 {
@@ -265,11 +265,11 @@ namespace Content.Server.Connection
                 }
                 else
                 {
-                    var code = _discordAuthManager.GenerateUserCode(userId);
+                    var code = _callistoDiscordAuthManager.GenerateUserCode(userId);
                     _sawmill.Warning($"Generated auth code for unauthorized user {userId}: {code}");
 
                     // Отправляем код боту (чтобы он мог проверить команду от игрока)
-                    await _discordAuthManager.SendAuthCodeToBot(userId, code, _cfg.GetCVar(CCVars.DiscordAuthSendSecretTokenBot));
+                    await _callistoDiscordAuthManager.SendAuthCodeToBot(userId, code, _cfg.GetCVar(CCVars.DiscordAuthSendSecretTokenBot));
 
                     var denyMessage = $"DISCORD_AUTH_DENY|{code}|" +
                                       "Вы не авторизованы через Discord!\n\n" +

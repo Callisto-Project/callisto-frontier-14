@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Content.Server._Callisto.Discord;
 
-public sealed class DiscordAuthManager
+public sealed class CallistoDiscordAuthManager
 {
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly ILogManager _logManager = default!;

@@ -10,7 +10,7 @@ using Content.Server.Afk;
 using Content.Server.Chat.Managers;
 using Content.Server.Connection;
 using Content.Server.Corvax.GuideGenerator;
-// using Content.Server.Corvax.DiscordAuth;
+using Content.Server.Corvax.DiscordAuth;
 using Content.Server.Corvax.JoinQueue;
 using Content.Server.Corvax.TTS;
 using Content.Server.Database;
@@ -89,12 +89,12 @@ namespace Content.Server.Entry
         [Dependency] private readonly ServerInfoManager _serverInfo = default!;
         [Dependency] private readonly ServerUpdateManager _updateManager = default!;
         // Custom dependencies
-        // [Dependency] private readonly DiscordAuthManager _discordAuth = default!; // Corvax-DiscordAuth
+        [Dependency] private readonly DiscordAuthManager _discordAuth = default!; // Corvax-DiscordAuth
         [Dependency] private readonly JoinQueueManager _joinQueue = default!; // Corvax-Queue
         [Dependency] private readonly TTSManager _tts = default!; // Corvax-TTS
         [Dependency] private readonly SponsorMusicManager _sponsorMusic = default!; // Lua SponsorPlayer
         [Dependency] private readonly MiniAuthManager _miniAuth = default!; // _NF.Auth
-        [Dependency] private readonly DiscordAuthManager _discordAuth = default!; // Callisto
+        [Dependency] private readonly CallistoDiscordAuthManager _callistoDiscordAuth = default!; // Callisto
 
         public override void PreInit()
         {
@@ -144,7 +144,7 @@ namespace Content.Server.Entry
                 _nodeFactory.Initialize();
                 _netResMan.Initialize();
                 _ghostKick.Initialize();
-                // _discordAuth.Initialize(); // Corvax-DiscordAuth
+                _discordAuth.Initialize(); // Corvax-DiscordAuth
                 _joinQueue.Initialize(); // Corvax-Queue
                 _tts.Initialize(); // Corvax-TTS
                 _sponsorMusic.Initialize(); // Lua SponsorPlayer
@@ -156,7 +156,7 @@ namespace Content.Server.Entry
                 _watchlistWebhookManager.Initialize();
                 _job.Initialize();
                 _rateLimit.Initialize();
-                _discordAuth.Initialize(); // Callisto
+                _callistoDiscordAuth.Initialize(); // Callisto
                 return;
             }
 
@@ -170,7 +170,7 @@ namespace Content.Server.Entry
             _nodeFactory.Initialize();
             _netResMan.Initialize();
             _ghostKick.Initialize();
-            // _discordAuth.Initialize(); // Corvax-DiscordAuth
+            _discordAuth.Initialize(); // Corvax-DiscordAuth
             _joinQueue.Initialize(); // Corvax-Queue
             _tts.Initialize(); // Corvax-TTS
             _sponsorMusic.Initialize(); // Lua SponsorPlayer
@@ -182,7 +182,7 @@ namespace Content.Server.Entry
             _watchlistWebhookManager.Initialize();
             _job.Initialize();
             _rateLimit.Initialize();
-            _discordAuth.Initialize(); // Callisto
+            _callistoDiscordAuth.Initialize(); // Callisto
         }
 
         public override void PostInit()
