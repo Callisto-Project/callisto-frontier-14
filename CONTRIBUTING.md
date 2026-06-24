@@ -174,6 +174,25 @@ if (TryComp<StampComponent>(uid, out var stamp))
 player-panel-job-whitelists = Role Whitelists
 ```
 
+Заголовки для файлов в `_Callisto`
+В каждый файл в папке _Callisto нужно добавить следующий блок:
+```cs
+// Copyright (c) 2024-2026 Callisto Project
+// Licensed under CELA (Callisto Exclusive License Agreement)
+// See LICENSE-CALLISTO.txt for full license information.
+// All rights reserved. Unauthorized use is strictly prohibited.
+```
+
+Для XAML/XML:
+```xaml
+<!-- 
+Copyright (c) 2024-2026 Callisto Project
+Licensed under CELA (Callisto Exclusive License Agreement)
+See LICENSE-CALLISTO.txt for full license information.
+All rights reserved. Unauthorized use is strictly prohibited.
+-->
+```
+
 ---
 
 ## Перед отправкой PR
