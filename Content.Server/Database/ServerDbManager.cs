@@ -32,6 +32,11 @@ namespace Content.Server.Database
 
         void Shutdown();
 
+        #region Chaos-Station Discord Auth
+        Task<string?> GetDiscordIdAsync(Guid userId);
+        Task<Guid?> GetUserIdByDiscordIdAsync(string discordId);
+        #endregion
+
         #region DynamicMarket
         Task<List<DynamicMarketEntry>> GetAllDynamicMarketEntries();
         Task UpsertDynamicMarketEntries(IReadOnlyCollection<(string protoId, double basePrice, double modPrice, long soldDelta, long boughtDelta, DateTime lastUpdate)> updates);
@@ -487,6 +492,20 @@ namespace Content.Server.Database
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.SaveAdminOOCColorAsync(userId, color));
         }
+
+        // Chaos-Station-Start: Discord Auth
+        public Task<string?> GetDiscordIdAsync(Guid userId)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetDiscordIdAsync(userId));
+        }
+
+        public Task<Guid?> GetUserIdByDiscordIdAsync(string discordId)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetUserIdByDiscordIdAsync(discordId));
+        }
+        // Chaos-Station-End
 
         public Task SaveConstructionFavoritesAsync(NetUserId userId, List<ProtoId<ConstructionPrototype>> constructionFavorites)
         {
