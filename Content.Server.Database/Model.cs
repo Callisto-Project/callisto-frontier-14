@@ -51,7 +51,7 @@ namespace Content.Server.Database
         public DbSet<IPIntelCache> IPIntelCache { get; set; } = null!;
         public DbSet<Sponsor> Sponsor { get; set; } = null!;
         public DbSet<DynamicMarketEntry> DynamicMarket { get; set; } = null!;
-        public DbSet<DiscordUser> DiscordUser { get; set; } = null!; // Callisto-Tweak: DiscordAuth
+        public DbSet<DiscordUser> DiscordUser { get; set; } = null!; // Callisto-Tweak: Discord Auth
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -304,7 +304,7 @@ namespace Content.Server.Database
                 .OwnsOne(p => p.HWId)
                 .Property(p => p.Type)
                 .HasDefaultValue(HwidType.Legacy);
-            // Callisto-Start: DiscordAuth
+            // Callisto-Start: Discord Auth
             modelBuilder.Entity<DiscordUser>()
                 .HasIndex(p => new { p.UserId, p.DiscordId })
                 .IsUnique();
@@ -1135,7 +1135,7 @@ namespace Content.Server.Database
         public DateTime LastUpdate { get; set; }
     }
 
-    // Callisto-Start: DiscordAuth
+    // Callisto-Start: Discord Auth
     public class DiscordUser
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
