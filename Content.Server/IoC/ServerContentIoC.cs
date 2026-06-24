@@ -97,6 +97,6 @@ internal static class ServerContentIoC
         deps.Register<MiniAuthManager>(); //Frontier
         deps.Register<DiscordLink>();
         deps.Register<DiscordChatLink>();
-        deps.Register<DiscordAuthManager>; // Callisto
+        deps.Register<DiscordAuthManager>(); // Callisto
     }
 }

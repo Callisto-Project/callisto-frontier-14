@@ -120,7 +120,7 @@ namespace Content.Client.Launcher
 
         private void ConnectFailReasonChanged(string? reason)
         {
-            // Chaos-Station-Start: Discord auth
+            // Callisto-Start: Discord auth
             if (reason == null)
             {
                 ConnectFailReason.SetMessage("");
@@ -132,13 +132,13 @@ namespace Content.Client.Launcher
                 ShowDiscordAuthDenyWindow(code, message);
                 return;
             }
-            // Chaos-Station-End
+            // Callisto-End
 
             ConnectFailReason.SetMessage(
                 Loc.GetString("connecting-fail-reason", ("reason", reason)));
         }
 
-        // Chaos-Station-Start: Discord auth
+        // Callisto-Start: Discord auth
         private bool TryParseDiscordAuthDeny(string reason, out string code, out string message)
         {
             code = "";
@@ -264,7 +264,7 @@ namespace Content.Client.Launcher
             _discordAuthWindow.Contents.AddChild(vbox);
             _discordAuthWindow.OpenCentered();
         }
-        // Chaos-Station-End
+        // Callisto-End
 
         private void LastNetDisconnectedArgsChanged(NetDisconnectedArgs? args)
         {

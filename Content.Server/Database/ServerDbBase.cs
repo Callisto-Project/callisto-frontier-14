@@ -1947,7 +1947,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
 
         #endregion
 
-        #region Chaos-Station Discord Auth
+        #region Callisto Discord Auth
         public async Task<string?> GetDiscordIdAsync(Guid userId)
         {
             await using var db = await GetDb();

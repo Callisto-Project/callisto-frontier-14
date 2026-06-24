@@ -252,9 +252,9 @@ namespace Content.Server.Connection
 
             var adminData = await _db.GetAdminDataForAsync(e.UserId);
 
-            // Chaos-Station-Start: Check Auth for Discord ID
+            // Callisto-Start: Check Auth for Discord ID
             // if (_cfg.GetCVar(CCVars.DiscordAuthEnable) && adminData == null)
-            // Chaos-Station-Start: Check Auth for Discord ID + красивое окно с кодом
+            // Callisto-Start: Check Auth for Discord ID + красивое окно с кодом
             if (_cfg.GetCVar(CCVars.DiscordAuthEnable))
             {
                 var discordId = await _discordAuthManager.GetDiscordId(userId);
@@ -284,7 +284,7 @@ namespace Content.Server.Connection
                     return (ConnectionDenyReason.DiscordAuth, denyMessage, null);
                 }
             }
-            // Chaos-Station-End
+            // Callisto-End
 
             // Corvax-Start: Allow privileged players bypass bunker
             var isPrivileged = await HavePrivilegedJoin(e.UserId);

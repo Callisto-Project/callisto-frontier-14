@@ -32,7 +32,7 @@ namespace Content.Server.Database
 
         void Shutdown();
 
-        #region Chaos-Station Discord Auth
+        #region Callisto Discord Auth
         Task<string?> GetDiscordIdAsync(Guid userId);
         Task<Guid?> GetUserIdByDiscordIdAsync(string discordId);
         #endregion
@@ -493,7 +493,7 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.SaveAdminOOCColorAsync(userId, color));
         }
 
-        // Chaos-Station-Start: Discord Auth
+        // Callisto-Start: Discord Auth
         public Task<string?> GetDiscordIdAsync(Guid userId)
         {
             DbReadOpsMetric.Inc();
@@ -505,7 +505,7 @@ namespace Content.Server.Database
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetUserIdByDiscordIdAsync(discordId));
         }
-        // Chaos-Station-End
+        // Callisto-End
 
         public Task SaveConstructionFavoritesAsync(NetUserId userId, List<ProtoId<ConstructionPrototype>> constructionFavorites)
         {

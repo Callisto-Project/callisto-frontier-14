@@ -51,7 +51,7 @@ namespace Content.Server.Database
         public DbSet<IPIntelCache> IPIntelCache { get; set; } = null!;
         public DbSet<Sponsor> Sponsor { get; set; } = null!;
         public DbSet<DynamicMarketEntry> DynamicMarket { get; set; } = null!;
-        public DbSet<DiscordUser> DiscordUser { get; set; } = null!; // Chaos-Station-Tweak: DiscordAuth
+        public DbSet<DiscordUser> DiscordUser { get; set; } = null!; // Callisto-Tweak: DiscordAuth
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -304,11 +304,11 @@ namespace Content.Server.Database
                 .OwnsOne(p => p.HWId)
                 .Property(p => p.Type)
                 .HasDefaultValue(HwidType.Legacy);
-            // Chaos-Station-Start: DiscordAuth
+            // Callisto-Start: DiscordAuth
             modelBuilder.Entity<DiscordUser>()
                 .HasIndex(p => new { p.UserId, p.DiscordId })
                 .IsUnique();
-            // Chaos-Station-End
+            // Callisto-End
 
             ModelBan.OnModelCreating(modelBuilder);
         }
@@ -792,7 +792,7 @@ namespace Content.Server.Database
         IPChecks = 6, // Frontier: 5<6
         /// Results from rejected connections who are authenticated but have no modern hwid associated with them.
         NoHwid = 7, // Frontier: 6<7
-        // Chaos-Station-Tweak: Add DiscordAuth as a connection denial reason for accounts that are authenticated but don't have a linked Discord account, or whose linked Discord account doesn't meet certain criteria (e.g. not being in the official SS14 Discord server).
+        // Callisto-Tweak: Add DiscordAuth as a connection denial reason for accounts that are authenticated but don't have a linked Discord account, or whose linked Discord account doesn't meet certain criteria (e.g. not being in the official SS14 Discord server).
         DiscordAuth = 8 // Callisto: 7<8
     }
 
@@ -1135,7 +1135,7 @@ namespace Content.Server.Database
         public DateTime LastUpdate { get; set; }
     }
 
-    // Chaos-Station-Start: DiscordAuth
+    // Callisto-Start: DiscordAuth
     public class DiscordUser
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -1144,5 +1144,5 @@ namespace Content.Server.Database
         [MaxLength(32)]
         public string DiscordId { get; set; } = default!;
     }
-    // Chaos-Station-End
+    // Callisto-End
 }
