@@ -1,122 +1,198 @@
-# Вклад в разработку Sector Frontier
+# Callisto Project - Соглашение о внесении вклада (CLA) и правила разработки
 
-Если вы собираетесь внести вклад в разработку Sector Frontier, обратитесь к [руководству по Pull Request’ам от Wizard's Den](https://docs.spacestation14.com/en/general-development/codebase-info/pull-request-guidelines.html) — оно послужит хорошей отправной точкой по качеству кода и работе с ветками. Обратите внимание, что у нас нет разделения на master/stable ветки.
-
-> ⚠️ **Не используйте веб-редактор GitHub.** Pull Request’ы, созданные через веб-редактор, могут быть закрыты без рассмотрения.
-
-"Upstream" означает [репозиторий space-wizards/space-station-14](https://github.com/new-frontiers-14/frontier-station-14/), из которого был сделан форк.
+Версия 1.0, Июнь 2026
 
 ---
 
-## Контент, специфичный для Фронтира
+## Содержание
 
-Всё, что вы создаёте с нуля (в отличие от изменений в существующем upstream-коде), должно размещаться в подкаталогах с префиксом `_Lua`.
+1. [Лицензионное соглашение (CLA)](#лицензионное-соглашение-cla)
+2. [Правила разработки](#правила-разработки)
+3. [Структура репозитория](#структура-репозитория)
+4. [Комментирование изменений](#комментирование-изменений)
+5. [Перед отправкой PR](#перед-отправкой-pr)
+
+---
+
+## Лицензионное соглашение (CLA)
+
+### Преамбула
+
+Настоящее Соглашение регулирует отношения между Контрибьютором и Проектом Callisto при передаче кода и других материалов в репозиторий проекта.
+
+### Определения
+
+**Контрибьютор** — физическое или юридическое лицо, предоставляющее Вклад в проект.
+
+**Проект Callisto** — проект по разработке компьютерной игры на основе Space Station 14.
+
+**Вклад (Contribution)** — любой код, документация, графика, звуки, дизайн или другие материалы, предоставленные Контрибьютором в проект.
+
+**Лицензиар** — Проект Callisto (Callisto Project).
+
+### Условия
+
+#### 1. Предоставление прав
+
+1.1. Контрибьютор предоставляет Лицензиару бессрочную, всемирную, неисключительную, бесплатную, безотзывную лицензию на:
+
+- Использование Вклада в любых целях, включая коммерческие
+- Воспроизведение Вклада
+- Создание производных работ на основе Вклада
+- Распространение Вклада
+- Публичное отображение и исполнение Вклада
+- Сублицензирование Вклада третьим лицам
+
+1.2. Контрибьютор сохраняет авторские права на свой Вклад.
+
+#### 2. Оригинальность работы
+
+2.1. Контрибьютор заявляет, что каждый отправленный им Вклад является его оригинальной работой.
+
+2.2. Если Вклад содержит материалы третьих лиц, Контрибьютор обязан:
+- Сохранить все уведомления об авторских правах
+- Указать источник материалов
+- Убедиться, что использование материалов разрешено
+
+#### 3. Эксклюзивный контент (_Callisto)
+
+3.1. При предоставлении Вклада в папку `_Callisto`, Контрибьютор соглашается, что данный Вклад будет распространяться под лицензией **CELA** (Callisto Exclusive License Agreement).
+
+3.2. Контрибьютор понимает, что код в `_Callisto` является эксклюзивной собственностью Проекта Callisto и не может использоваться без разрешения.
+
+#### 4. Отказ от гарантий
+
+4.1. Вклад предоставляется "КАК ЕСТЬ" без каких-либо гарантий.
+
+4.2. Лицензиар не несёт ответственности за любой ущерб, возникший в результате использования Вклада.
+
+#### 5. Применимое право
+
+5.1. Настоящее Соглашение регулируется законодательством Российской Федерации.
+
+5.2. Все споры решаются в судебном порядке по месту нахождения Лицензиара.
+
+### Подписание
+
+Отправляя Pull Request в репозиторий Callisto, вы автоматически соглашаетесь с условиями настоящего Соглашения.
+
+---
+
+## Правила разработки
+
+Если вы собираетесь внести вклад в разработку Callisto, обратитесь к [руководству по Pull Request'ам от Wizard's Den](https://docs.spacestation14.com/en/general-development/codebase-info/pull-request-guidelines.html) — оно послужит хорошей отправной точкой по качеству кода и работе с ветками.
+
+> ⚠️ **Не используйте веб-редактор GitHub.** Pull Request'ы, созданные через веб-редактор, могут быть закрыты без рассмотрения.
+
+"Upstream" означает [репозиторий space-wizards/space-station-14](https://github.com/space-wizards/space-station-14/), из которого был сделан форк.
+
+---
+
+## Структура репозитория
+
+### Контент, специфичный для Callisto
+
+Всё, что вы создаёте с нуля (в отличие от изменений в существующем upstream-коде), должно размещаться в подкаталогах с префиксом `_Callisto`.
 
 **Примеры:**
-- `Content.Server/_Lua/Shipyard/Systems/ShipyardSystem.cs`
-- `Resources/Prototypes/_Lua/Loadouts/role_loadouts.yml`
-- `Resources/Audio/_Lua/Voice/Goblin/goblin-scream-03.ogg`
-- `Resources/Textures/_Lua/Tips/clippy.rsi/left.png`
-- `Resources/Locale/en-US/_Lua/devices/pda.ftl`
-- `Resources/ServerInfo/_Lua/Guidebook/Medical/Doc.xml`
+- `Content.Server/_Callisto/Discord/Systems/DiscordAuthSystem.cs`
+- `Resources/Prototypes/_Callisto/Loadouts/role_loadouts.yml`
+- `Resources/Audio/_Callisto/Voice/`
+- `Resources/Textures/_Callisto/Tips/`
+- `Resources/Locale/en-US/_Callisto/devices/pda.ftl`
+- `Resources/ServerInfo/_Callisto/Guidebook/`
 
 ---
 
-## Изменения файлов из upstream
+## Комментирование изменений
+
+### Изменения файлов из upstream
 
 Если вы вносите изменения в C#- или YAML-файлы из upstream, **обязательно добавляйте комментарии около изменённых строк**. Это поможет упростить разрешение конфликтов при будущих обновлениях.
 
-Если вы изменяете значения, используйте формат комментария `Lua: СТАРОЕ<НОВОЕ`.
+Если вы изменяете значения, используйте формат комментария `Callisto: СТАРОЕ<НОВОЕ`.
 
-**Для YAML:**
-- Если вы добавляете прототип или набор прототипов подряд — используйте блочные комментарии.
-- Если изменяете отдельные поля прототипа — комментируйте каждое по отдельности.
+### Для YAML
 
-**Для C#:**
-- Если вы добавляете много кода, рассмотрите возможность вынесения в `partial class`, когда это уместно.
-- Если портируете фичи из upstream, указывайте номер PR-а, из которого брали код.
+- Если вы добавляете прототип или набор прототипов подряд — используйте блочные комментарии
+- Если изменяете отдельные поля прототипа — комментируйте каждое по отдельности
+
+### Для C#
+
+- Если вы добавляете много кода, рассмотрите возможность вынесения в `partial class`, когда это уместно
+- Если портируете фичи из upstream, указывайте номер PR-а, из которого брали код
 
 > ⚠️ Fluent-файлы (.ftl) **не поддерживают комментарии на одной строке с переводом** — оставляйте комментарии строкой выше.
 
----
-
-## Примеры комментариев
+### Примеры комментариев
 
 **Изменение поля YAML:**
 ```yml
 - type: entity
   id: TorsoHarpy
   name: "harpy torso"
-  parent: [PartHarpy, BaseTorso] #Lua: добавлен BaseTorso
+  parent: [PartHarpy, BaseTorso] # Callisto: добавлен BaseTorso
 ```
 
 **Изменение значения:**
 ```yml
-  - type: Gun
-    fireRate: 4 #Lua: 3<4
+- type: Gun
+  fireRate: 4 # Callisto: 3<4
 ```
 
 **Добавление нового прототипа:**
 ```yml
-  - type: ItemBorgModule
-    moduleId: Gardening #Lua
-    items:
-    - HydroponicsToolMiniHoe
-    - HydroponicsToolSpade
-    - HydroponicsToolClippers
-    # - Bucket #Lua
-  #Lua: добавлены выпадающие борг-компоненты
-  - type: DroppableBorgModule
-    moduleId: Gardening
-    items:
-    - id: Bucket
-      whitelist:
-        tags:
-        - Bucket
-  # End Lua
+# Callisto-Start: добавлены выпадающие компоненты
+- type: DroppableBorgModule
+  moduleId: Gardening
+  items:
+  - id: Bucket
+    whitelist:
+      tags:
+      - Bucket
+# Callisto-End
 ```
 
 **Добавление using'а в C#:**
 ```cs
-using Content.Client._NF.Emp.Overlays; //Lua
+using Content.Client._Callisto.Emp.Overlays; // Callisto
 ```
 
 **Обёртка над блоком нового кода:**
 ```cs
-component.Capacity = state.Capacity;
-
-component.UIUpdateNeeded = true;
-
-//Lua Start: синхронизация цвета подписи
+// Callisto-Start: синхронизация цвета подписи
 if (TryComp<StampComponent>(uid, out var stamp))
 {
     stamp.StampedColor = state.Color;
 }
-//Lua End
+// Callisto-End
 ```
 
 **Изменение строки в локализации:**
 ```fluent
-#Lua: "Job Whitelists"<"Role Whitelists"
+#Callisto: "Job Whitelists"<"Role Whitelists"
 player-panel-job-whitelists = Role Whitelists
 ```
 
----
+Заголовки для файлов в `_Callisto`
+В каждый файл в папке _Callisto нужно добавить следующий блок:
+```cs
+// Copyright (c) 2024-2026 Callisto Project
+// Licensed under CELA (Callisto Exclusive License Agreement)
+// See LICENSE-CALLISTO.txt for full license information.
+// All rights reserved. Unauthorized use is strictly prohibited.
+```
 
-## Карты
+Для XAML/XML:
+```xaml
+<!-- 
+Copyright (c) 2024-2026 Callisto Project
+Licensed under CELA (Callisto Exclusive License Agreement)
+See LICENSE-CALLISTO.txt for full license information.
+All rights reserved. Unauthorized use is strictly prohibited.
+-->
+```
 
-По кораблям и POI читайте [Ship Submission Guidelines](https://frontierstation.wiki.gg/wiki/Ship_Submission_Guidelines) на вики Frontier.
-
-В общих чертах:
-
-- Frontier использует специальные прототипы для POI и кораблей, содержащие информацию о спавне, цене и категориях.
-- Для кораблей используйте `VesselPrototype` в `Resources/Prototypes/_Lua/Shipyard`, для POI — `PointOfInterestPrototype`.
-
-Если вы вносите изменения в существующую карту, согласуйте это с её мейнтейнером или автором. Избегайте одновременной работы нескольких людей над одной картой — это создаёт конфликты, которые сложно разрешить.
-
-В Sector Frontier особая схемотехника шаттлов, сдедуйте определенным дизайнам шаттлостроения, мы понимаем что в космосе нет аэродинамики но требуем её соблюдать в инных случаях шаттл может быть отклонен по причине несоотвествия концепту проекта
-Пример:
-<img width="300" height="450" alt="image" src="https://github.com/user-attachments/assets/a2c2d347-321a-441d-8696-49e2d1e7d0df" />
 ---
 
 ## Перед отправкой PR
@@ -127,13 +203,13 @@ player-panel-job-whitelists = Role Whitelists
 ```bash
 git checkout upstream/master RobustToolbox
 ```
-*(замените `upstream` на имя вашего origin для HacksLua/sector-frontier)*
+*(замените `upstream` на имя вашего origin для Callisto)*
 
 ---
 
 ## Ченджлоги
 
-Пока что все изменения идут в общий ченджлог Фронтира. Префикс `ADMIN:` пока не имеет эффекта.
+Все изменения идут в общий ченджлог проекта. Префикс `ADMIN:` пока не имеет эффекта.
 
 ---
 
@@ -144,8 +220,10 @@ git checkout upstream/master RobustToolbox
 
 ---
 
-## Генерированный ИИ-контент
+## Контакты
 
-Контент, созданный ИИ (код, спрайты и т.п.), **запрещено** добавлять в репозиторий.
+По всем вопросам: **contact@callisto-project.com**
 
-Попытка отправить такой контент может привести к **бану на участие в разработке**.
+---
+
+*Отправляя Pull Request, вы автоматически соглашаетесь со всеми условиями, изложенными выше.*
