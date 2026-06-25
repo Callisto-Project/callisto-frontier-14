@@ -38,6 +38,7 @@ using Content.Shared.IoC;
 using Content.Shared.Kitchen;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
+using Content.Server._Callisto.Discord; // Callisto
 
 namespace Content.Server.IoC;
 
@@ -96,5 +97,6 @@ internal static class ServerContentIoC
         deps.Register<MiniAuthManager>(); //Frontier
         deps.Register<DiscordLink>();
         deps.Register<DiscordChatLink>();
+        deps.Register<CallistoDiscordAuthManager>(); // Callisto
     }
 }

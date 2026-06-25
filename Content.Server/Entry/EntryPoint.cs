@@ -41,6 +41,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Server._Callisto.Discord; // Callisto
 
 namespace Content.Server.Entry
 {
@@ -93,6 +94,7 @@ namespace Content.Server.Entry
         [Dependency] private readonly TTSManager _tts = default!; // Corvax-TTS
         [Dependency] private readonly SponsorMusicManager _sponsorMusic = default!; // Lua SponsorPlayer
         [Dependency] private readonly MiniAuthManager _miniAuth = default!; // _NF.Auth
+        [Dependency] private readonly CallistoDiscordAuthManager _callistoDiscordAuth = default!; // Callisto
 
         public override void PreInit()
         {
@@ -154,6 +156,7 @@ namespace Content.Server.Entry
                 _watchlistWebhookManager.Initialize();
                 _job.Initialize();
                 _rateLimit.Initialize();
+                _callistoDiscordAuth.Initialize(); // Callisto
                 return;
             }
 
@@ -179,6 +182,7 @@ namespace Content.Server.Entry
             _watchlistWebhookManager.Initialize();
             _job.Initialize();
             _rateLimit.Initialize();
+            _callistoDiscordAuth.Initialize(); // Callisto
         }
 
         public override void PostInit()
